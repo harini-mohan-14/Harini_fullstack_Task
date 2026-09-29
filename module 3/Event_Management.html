@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CelebrateX | Event Management</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+
+        /* ==============================
+           GENERAL
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            /* NEW BACKGROUND */
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff7ed 0%,
+                    #ffe4e6 35%,
+                    #fce7f3 65%,
+                    #ede9fe 100%
+                );
+
+            color: #333;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .section {
+            display: none;
+            min-height: calc(100vh - 75px);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container-custom {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.10);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 30px;
+            font-weight: bold;
+            color: #7c3aed !important;
+        }
+
+        .navbar-brand span {
+            color: #f97316;
+        }
+
+        .nav-link {
+            color: #444 !important;
+            font-weight: 600;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #f97316 !important;
+        }
+
+
+        /* ==============================
+           HOME
+        ============================== */
+
+        .hero {
+            min-height: calc(100vh - 75px);
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.55),
+                    rgba(255,255,255,0.70)
+                );
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding: 80px 0;
+        }
+
+        .hero-small {
+            color: #f97316;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            font-weight: 800;
+            color: #312e81;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #f97316;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #555;
+            margin-top: 25px;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .btn-main {
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn-main:hover {
+            background: #ea580c;
+            color: white;
+        }
+
+        .btn-outline-main {
+            border: 2px solid #7c3aed;
+            color: #7c3aed;
+            background: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .btn-outline-main:hover {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .hero-image {
+            text-align: center;
+            font-size: 190px;
+        }
+
+
+        /* ==============================
+           PAGE HEADER
+        ============================== */
+
+        .page-header {
+            text-align: center;
+            padding: 80px 20px 60px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.80),
+                    rgba(253,230,138,0.35)
+                );
+        }
+
+        .page-header h1 {
+            color: #7c3aed;
+            font-size: 55px;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: #666;
+            margin-top: 15px;
+        }
+
+
+        /* ==============================
+           EVENT CARDS
+        ============================== */
+
+        .events-container {
+            padding: 60px 0;
+        }
+
+        .event-card {
+            background: rgba(255,255,255,0.90);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            height: 100%;
+            border: 1px solid #eadcff;
+            box-shadow: 0 10px 30px rgba(124,58,237,0.10);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(124,58,237,0.18);
+        }
+
+        .event-icon {
+            font-size: 75px;
+            margin-bottom: 20px;
+        }
+
+        .event-card h3 {
+            color: #f97316;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .event-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .view-details {
+            margin-top: 20px;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           DETAIL PAGE
+        ============================== */
+
+        .details-container {
+            padding: 70px 0;
+        }
+
+        .detail-box {
+            background: rgba(255,255,255,0.94);
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+        }
+
+        .detail-icon {
+            font-size: 120px;
+            text-align: center;
+        }
+
+        .detail-box h2 {
+            color: #7c3aed;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .detail-box h4 {
+            color: #f97316;
+            margin-top: 30px;
+        }
+
+        .detail-box ul {
+            line-height: 2;
+        }
+
+        .detail-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f97316;
+            margin: 25px 0;
+        }
+
+
+        /* ==============================
+           SEARCH
+        ============================== */
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-box input {
+            border-radius: 30px;
+            padding: 15px 25px;
+            border: 2px solid #ddd;
+        }
+
+
+        /* ==============================
+           GALLERY
+        ============================== */
+
+        .gallery {
+            padding: 60px 0;
+        }
+
+        .gallery-card {
+            height: 230px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 90px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #fef3c7,
+                    #fce7f3,
+                    #ede9fe
+                );
+            box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+            margin-bottom: 25px;
+        }
+
+
+        /* ==============================
+           PACKAGES
+        ============================== */
+
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+            height: 100%;
+        }
+
+        .package-card h3 {
+            color: #7c3aed;
+        }
+
+        .package-price {
+            font-size: 35px;
+            font-weight: bold;
+            color: #f97316;
+            margin: 20px 0;
+        }
+
+        .package-card ul {
+            text-align: left;
+            line-height: 2;
+        }
+
+
+        /* ==============================
+           ABOUT
+        ============================== */
+
+        .about-box {
+            background: white;
+            padding: 45px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+        }
+
+        .about-box h2 {
+            color: #7c3aed;
+        }
+
+
+        /* ==============================
+           REVIEWS
+        ============================== */
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 22px;
+        }
+
+
+        /* ==============================
+           BOOKING
+        ============================== */
+
+        .booking-container {
+            padding: 60px 0;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.10);
+        }
+
+        .booking-form h3 {
+            color: #7c3aed;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 0.2rem rgba(124,58,237,0.15);
+        }
+
+        .booking-summary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #a855f7
+                );
+            color: white;
+            padding: 35px;
+            border-radius: 25px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-summary h3 {
+            margin-bottom: 25px;
+        }
+
+        .total-price {
+            font-size: 35px;
+            font-weight: bold;
+            color: #fde68a;
+        }
+
+
+        /* ==============================
+           CONTACT
+        ============================== */
+
+        .contact-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+
+        .contact-icon {
+            font-size: 45px;
+            color: #f97316;
+            margin-bottom: 15px;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            background: #312e81;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media(max-width: 768px) {
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-image {
+                font-size: 120px;
+                margin-top: 40px;
+            }
+
+            .page-header h1 {
+                font-size: 40px;
+            }
+
+            .detail-box {
+                padding: 25px;
+            }
+
+            .detail-box h2 {
+                font-size: 32px;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="#home">
+            Celebrate<span>X</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#home">
+                        🏠 Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#events">
+                        💍 Events
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#gallery">
+                        📸 Gallery
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#packages">
+                        💰 Packages
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#about">
+                        👤 About
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#reviews">
+                        ⭐ Reviews
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#booking">
+                        📅 Booking
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-link" href="#contact">
+                        📧 Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HOME PAGE
+========================================================= -->
+
+<section id="home" class="section active">
+
+    <div class="hero">
+
+        <div class="container-custom">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-7 hero-content">
+
+                    <div class="hero-small">
+                        Professional Event Management
+                    </div>
+
+                    <h1>
+                        Make Your
+                        <span>Special</span>
+                        Moments
+                        <span>Unforgettable</span>
+                    </h1>
+
+                    <p>
+                        We organize weddings, birthdays, anniversaries,
+                        baby showers, college events, corporate events
+                        and special parties.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#events" class="btn btn-main page-link">
+                            Explore Events
+                        </a>
+
+                        <a href="#booking" class="btn btn-outline-main page-link">
+                            Book Your Event
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5">
+
+                    <div class="hero-image">
+                        🎉
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EVENTS PAGE
+========================================================= -->
+
+<section id="events" class="section">
+
+    <div class="page-header">
+
+        <h1>Our Events</h1>
+
+        <p>
+            Choose the perfect event for your special occasion.
+        </p>
+
+    </div>
+
+    <div class="events-container">
+
+        <div class="container-custom">
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="eventSearch"
+                    class="form-control"
+                    placeholder="🔎 Search event...">
+
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <!-- WEDDING -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="wedding marriage">
+
+                    <div class="event-card"
+                         onclick="showPage('wedding')">
+
+                        <div class="event-icon">
+                            💍
+                        </div>
+
+                        <h3>
+                            Wedding / Marriage
+                        </h3>
+
+                        <p>
+                            Complete wedding planning with beautiful
+                            decoration, catering, photography and
+                            entertainment.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BIRTHDAY -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="birthday">
+
+                    <div class="event-card"
+                         onclick="showPage('birthday')">
+
+                        <div class="event-icon">
+                            🎂
+                        </div>
+
+                        <h3>
+                            Birthday Party
+                        </h3>
+
+                        <p>
+                            Creative birthday themes, decorations,
+                            cakes, games and entertainment.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANNIVERSARY -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="anniversary">
+
+                    <div class="event-card"
+                         onclick="showPage('anniversary')">
+
+                        <div class="event-icon">
+                            ❤️
+                        </div>
+
+                        <h3>
+                            Anniversary
+                        </h3>
+
+                        <p>
+                            Celebrate your anniversary with romantic
+                            decorations, food and memorable arrangements.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BABY SHOWER -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="baby shower">
+
+                    <div class="event-card"
+                         onclick="showPage('baby')">
+
+                        <div class="event-icon">
+                            👶
+                        </div>
+
+                        <h3>
+                            Baby Shower
+                        </h3>
+
+                        <p>
+                            Beautiful baby shower themes, decorations,
+                            food and photography.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COLLEGE -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="college">
+
+                    <div class="event-card"
+                         onclick="showPage('college')">
+
+                        <div class="event-icon">
+                            🎓
+                        </div>
+
+                        <h3>
+                            College Events
+                        </h3>
+
+                        <p>
+                            Cultural programs, college festivals,
+                            seminars, farewell parties and celebrations.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CORPORATE -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="corporate">
+
+                    <div class="event-card"
+                         onclick="showPage('corporate')">
+
+                        <div class="event-icon">
+                            🏢
+                        </div>
+
+                        <h3>
+                            Corporate Events
+                        </h3>
+
+                        <p>
+                            Conferences, meetings, award functions,
+                            team events and corporate parties.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PARTY -->
+
+                <div class="col-lg-4 col-md-6 event-item"
+                     data-event="party">
+
+                    <div class="event-card"
+                         onclick="showPage('party')">
+
+                        <div class="event-icon">
+                            🎉
+                        </div>
+
+                        <h3>
+                            Party Events
+                        </h3>
+
+                        <p>
+                            Fun parties with music, DJ, decoration,
+                            food and entertainment.
+                        </p>
+
+                        <div class="view-details">
+                            View Details →
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     WEDDING DETAILS
+========================================================= -->
+
+<section id="wedding" class="section">
+
+    <div class="page-header">
+
+        <h1>💍 Wedding / Marriage</h1>
+
+        <p>
+            Complete wedding event management
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    💍
+                </div>
+
+                <h2>
+                    Wedding & Marriage Events
+                </h2>
+
+                <p>
+                    We create beautiful and memorable wedding
+                    celebrations according to your requirements.
+                </p>
+
+                <h4>Our Wedding Services</h4>
+
+                <ul>
+                    <li>Wedding venue decoration</li>
+                    <li>Stage decoration</li>
+                    <li>Flower decoration</li>
+                    <li>Wedding photography</li>
+                    <li>Videography</li>
+                    <li>Catering arrangements</li>
+                    <li>Music and entertainment</li>
+                    <li>Guest management</li>
+                    <li>Wedding invitations</li>
+                    <li>Complete event coordination</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹25,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Wedding
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BIRTHDAY DETAILS
+========================================================= -->
+
+<section id="birthday" class="section">
+
+    <div class="page-header">
+
+        <h1>🎂 Birthday Party</h1>
+
+        <p>
+            Make your birthday celebration special
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    🎂
+                </div>
+
+                <h2>
+                    Birthday Party Events
+                </h2>
+
+                <p>
+                    We organize fun and creative birthday parties
+                    for children, teenagers and adults.
+                </p>
+
+                <h4>Our Birthday Services</h4>
+
+                <ul>
+                    <li>Theme decorations</li>
+                    <li>Birthday cake arrangements</li>
+                    <li>Balloon decoration</li>
+                    <li>Photography</li>
+                    <li>Games and activities</li>
+                    <li>DJ and music</li>
+                    <li>Food and catering</li>
+                    <li>Return gifts</li>
+                    <li>Party invitations</li>
+                    <li>Complete event management</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹15,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Birthday Party
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ANNIVERSARY DETAILS
+========================================================= -->
+
+<section id="anniversary" class="section">
+
+    <div class="page-header">
+
+        <h1>❤️ Anniversary</h1>
+
+        <p>
+            Celebrate your beautiful journey together
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    ❤️
+                </div>
+
+                <h2>
+                    Anniversary Events
+                </h2>
+
+                <p>
+                    Create a romantic and memorable anniversary
+                    celebration for your special day.
+                </p>
+
+                <h4>Our Anniversary Services</h4>
+
+                <ul>
+                    <li>Romantic decorations</li>
+                    <li>Candle light setup</li>
+                    <li>Flower arrangements</li>
+                    <li>Photography</li>
+                    <li>Special dinner arrangements</li>
+                    <li>Music and entertainment</li>
+                    <li>Customized cake</li>
+                    <li>Venue decoration</li>
+                    <li>Gift arrangements</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹20,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Anniversary
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BABY SHOWER DETAILS
+========================================================= -->
+
+<section id="baby" class="section">
+
+    <div class="page-header">
+
+        <h1>👶 Baby Shower</h1>
+
+        <p>
+            A beautiful celebration for the new beginning
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    👶
+                </div>
+
+                <h2>
+                    Baby Shower Events
+                </h2>
+
+                <p>
+                    Celebrate the arrival of a little one with
+                    beautiful themes and memorable decorations.
+                </p>
+
+                <h4>Our Baby Shower Services</h4>
+
+                <ul>
+                    <li>Baby shower theme decoration</li>
+                    <li>Balloon decoration</li>
+                    <li>Flower decoration</li>
+                    <li>Welcome board</li>
+                    <li>Photography</li>
+                    <li>Games and activities</li>
+                    <li>Catering</li>
+                    <li>Baby shower cake</li>
+                    <li>Return gifts</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹18,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Baby Shower
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     COLLEGE DETAILS
+========================================================= -->
+
+<section id="college" class="section">
+
+    <div class="page-header">
+
+        <h1>🎓 College Events</h1>
+
+        <p>
+            Professional college event management
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    🎓
+                </div>
+
+                <h2>
+                    College Events
+                </h2>
+
+                <p>
+                    We organize college festivals, cultural events,
+                    seminars, farewell functions and other programs.
+                </p>
+
+                <h4>Our College Event Services</h4>
+
+                <ul>
+                    <li>College cultural programs</li>
+                    <li>Technical events</li>
+                    <li>Farewell parties</li>
+                    <li>Freshers events</li>
+                    <li>Seminars</li>
+                    <li>Stage setup</li>
+                    <li>Sound system</li>
+                    <li>Lighting</li>
+                    <li>Photography</li>
+                    <li>Guest management</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹30,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book College Event
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CORPORATE DETAILS
+========================================================= -->
+
+<section id="corporate" class="section">
+
+    <div class="page-header">
+
+        <h1>🏢 Corporate Events</h1>
+
+        <p>
+            Professional corporate event solutions
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    🏢
+                </div>
+
+                <h2>
+                    Corporate Events
+                </h2>
+
+                <p>
+                    Professional event management for companies,
+                    organizations and business teams.
+                </p>
+
+                <h4>Our Corporate Services</h4>
+
+                <ul>
+                    <li>Business conferences</li>
+                    <li>Corporate meetings</li>
+                    <li>Product launches</li>
+                    <li>Award functions</li>
+                    <li>Team building events</li>
+                    <li>Annual celebrations</li>
+                    <li>Stage and lighting</li>
+                    <li>Audio and video setup</li>
+                    <li>Catering</li>
+                    <li>Guest management</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹40,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Corporate Event
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PARTY DETAILS
+========================================================= -->
+
+<section id="party" class="section">
+
+    <div class="page-header">
+
+        <h1>🎉 Party Events</h1>
+
+        <p>
+            Fun, exciting and unforgettable parties
+        </p>
+
+    </div>
+
+    <div class="details-container">
+
+        <div class="container-custom">
+
+            <div class="detail-box">
+
+                <div class="detail-icon">
+                    🎉
+                </div>
+
+                <h2>
+                    Special Party Events
+                </h2>
+
+                <p>
+                    We organize private parties and celebrations
+                    with decoration, food, music and entertainment.
+                </p>
+
+                <h4>Our Party Services</h4>
+
+                <ul>
+                    <li>Theme party decoration</li>
+                    <li>DJ and music</li>
+                    <li>Dance floor</li>
+                    <li>Lighting</li>
+                    <li>Food and catering</li>
+                    <li>Photography</li>
+                    <li>Games and entertainment</li>
+                    <li>Balloon decoration</li>
+                    <li>Party invitations</li>
+                </ul>
+
+                <div class="detail-price">
+                    Packages from ₹20,000
+                </div>
+
+                <a href="#booking"
+                   class="btn btn-main page-link">
+                    Book Party
+                </a>
+
+                <button
+                    class="btn btn-outline-main"
+                    onclick="showPage('events')">
+                    ← Back to Events
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     GALLERY
+========================================================= -->
+
+<section id="gallery" class="section">
+
+    <div class="page-header">
+
+        <h1>📸 Event Gallery</h1>
+
+        <p>
+            Some beautiful moments organized by CelebrateX
+        </p>
+
+    </div>
+
+    <div class="gallery">
+
+        <div class="container-custom">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="gallery-card">💍</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gallery-card">🎂</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gallery-card">❤️</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gallery-card">👶</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gallery-card">🎓</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="gallery-card">🎉</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PACKAGES
+========================================================= -->
+
+<section id="packages" class="section">
+
+    <div class="page-header">
+
+        <h1>💰 Our Packages</h1>
+
+        <p>
+            Select a package according to your event requirements.
+        </p>
+
+    </div>
+
+    <div class="container-custom py-5">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="package-card">
+
+                    <h3>Basic Package</h3>
+
+                    <div class="package-price">
+                        ₹25,000
+                    </div>
+
+                    <ul>
+                        <li>Basic Decoration</li>
+                        <li>Basic Catering</li>
+                        <li>Event Coordination</li>
+                        <li>Basic Photography</li>
+                        <li>Guest Management</li>
+                    </ul>
+
+                    <a href="#booking"
+                       class="btn btn-main page-link">
+                        Select Package
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="package-card">
+
+                    <h3>Premium Package</h3>
+
+                    <div class="package-price">
+                        ₹60,000
+                    </div>
+
+                    <ul>
+                        <li>Premium Decoration</li>
+                        <li>Premium Catering</li>
+                        <li>Photography</li>
+                        <li>DJ & Music</li>
+                        <li>Event Coordinator</li>
+                        <li>Guest Management</li>
+                    </ul>
+
+                    <a href="#booking"
+                       class="btn btn-main page-link">
+                        Select Package
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <div class="package-card">
+
+                    <h3>Luxury Package</h3>
+
+                    <div class="package-price">
+                        ₹1,25,000
+                    </div>
+
+                    <ul>
+                        <li>Luxury Decoration</li>
+                        <li>Premium Catering</li>
+                        <li>Professional Photography</li>
+                        <li>DJ & Entertainment</li>
+                        <li>Complete Event Management</li>
+                        <li>Special Theme Setup</li>
+                    </ul>
+
+                    <a href="#booking"
+                       class="btn btn-main page-link">
+                        Select Package
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+
+<section id="about" class="section">
+
+    <div class="page-header">
+
+        <h1>👤 About CelebrateX</h1>
+
+        <p>
+            Your trusted event management partner
+        </p>
+
+    </div>
+
+    <div class="container-custom py-5">
+
+        <div class="about-box">
+
+            <h2>
+                We Make Your Events Special
+            </h2>
+
+            <p class="mt-4">
+                CelebrateX is an event management service designed
+                to organize memorable celebrations for individuals,
+                families, colleges and organizations.
+            </p>
+
+            <p>
+                From small birthday parties to large weddings and
+                corporate events, our team can help plan decoration,
+                food, photography, entertainment and event coordination.
+            </p>
+
+            <h4 class="mt-4">
+                Why Choose CelebrateX?
+            </h4>
+
+            <ul class="mt-3">
+                <li>Professional event planning</li>
+                <li>Creative decorations</li>
+                <li>Flexible packages</li>
+                <li>Experienced event coordination</li>
+                <li>Customized event solutions</li>
+                <li>Customer-focused service</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     REVIEWS
+========================================================= -->
+
+<section id="reviews" class="section">
+
+    <div class="page-header">
+
+        <h1>⭐ Customer Reviews</h1>
+
+        <p>
+            What our customers say about our services
+        </p>
+
+    </div>
+
+    <div class="container-custom py-5">
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p class="mt-3">
+                        "The wedding decoration was beautiful
+                        and the entire event was well organized."
+                    </p>
+
+                    <strong>
+                        - Priya
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p class="mt-3">
+                        "Our birthday party was amazing.
+                        The decoration and entertainment were excellent."
+                    </p>
+
+                    <strong>
+                        - Rahul
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="review-card">
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p class="mt-3">
+                        "Very professional service for our college event.
+                        Everything was managed properly."
+                    </p>
+
+                    <strong>
+                        - Ananya
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     BOOKING PAGE
+========================================================= -->
+
+<section id="booking" class="section">
+
+    <div class="page-header">
+
+        <h1>📅 Book Your Event</h1>
+
+        <p>
+            Fill in all the details below to plan your event.
+        </p>
+
+    </div>
+
+
+    <div class="booking-container">
+
+        <div class="container-custom">
+
+            <div class="row g-4">
+
+
+                <!-- BOOKING FORM -->
+
+                <div class="col-lg-8">
+
+                    <div class="booking-form">
+
+                        <h3>
+                            📝 Complete Event Booking Form
+                        </h3>
+
+                        <form id="bookingForm">
+
+
+                            <!-- PERSONAL DETAILS -->
+
+                            <h5 class="mb-3 text-primary">
+                                1. Personal Details
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Full Name *
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="fullName"
+                                        placeholder="Enter your full name"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Email *
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="email"
+                                        placeholder="example@gmail.com"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Phone Number *
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        id="phone"
+                                        placeholder="10 digit mobile number"
+                                        maxlength="10"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Alternate Phone
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        id="alternatePhone"
+                                        placeholder="Optional">
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- EVENT DETAILS -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                2. Event Details
+                            </h5>
+
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Event Type *
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        id="eventType"
+                                        required>
+
+                                        <option value="">
+                                            Select Event
+                                        </option>
+
+                                        <option value="Wedding / Marriage">
+                                            Wedding / Marriage
+                                        </option>
+
+                                        <option value="Birthday Party">
+                                            Birthday Party
+                                        </option>
+
+                                        <option value="Anniversary">
+                                            Anniversary
+                                        </option>
+
+                                        <option value="Baby Shower">
+                                            Baby Shower
+                                        </option>
+
+                                        <option value="College Event">
+                                            College Event
+                                        </option>
+
+                                        <option value="Corporate Event">
+                                            Corporate Event
+                                        </option>
+
+                                        <option value="Party Event">
+                                            Party Event
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Event Date *
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        id="eventDate"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Event Start Time *
+                                    </label>
+
+                                    <input
+                                        type="time"
+                                        class="form-control"
+                                        id="startTime"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Event End Time
+                                    </label>
+
+                                    <input
+                                        type="time"
+                                        class="form-control"
+                                        id="endTime">
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Number of Guests *
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="guests"
+                                        min="1"
+                                        placeholder="Example: 100"
+                                        required>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Venue Type *
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        id="venueType"
+                                        required>
+
+                                        <option value="">
+                                            Select Venue
+                                        </option>
+
+                                        <option>
+                                            Marriage Hall
+                                        </option>
+
+                                        <option>
+                                            Hotel
+                                        </option>
+
+                                        <option>
+                                            Outdoor
+                                        </option>
+
+                                        <option>
+                                            College Campus
+                                        </option>
+
+                                        <option>
+                                            Company Office
+                                        </option>
+
+                                        <option>
+                                            Private Home
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- VENUE ADDRESS -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                3. Venue Details
+                            </h5>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Venue Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="venueName"
+                                    placeholder="Enter venue name">
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Complete Venue Address *
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="venueAddress"
+                                    rows="3"
+                                    placeholder="Enter complete venue address"
+                                    required></textarea>
+
+                            </div>
+
+
+                            <!-- PACKAGE -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                4. Select Package
+                            </h5>
+
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Package *
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="package"
+                                    required>
+
+                                    <option value="">
+                                        Select Package
+                                    </option>
+
+                                    <option value="Basic" data-price="25000">
+                                        Basic - ₹25,000
+                                    </option>
+
+                                    <option value="Premium" data-price="60000">
+                                        Premium - ₹60,000
+                                    </option>
+
+                                    <option value="Luxury" data-price="125000">
+                                        Luxury - ₹1,25,000
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- SERVICES -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                5. Additional Services
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <div class="form-check mb-3">
+
+                                        <input
+                                            class="form-check-input extra-service"
+                                            type="checkbox"
+                                            value="Photography"
+                                            data-price="5000"
+                                            id="photo">
+
+                                        <label
+                                            class="form-check-label"
+                                            for="photo">
+
+                                            Photography + ₹5,000
+
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="form-check mb-3">
+
+                                        <input
+                                            class="form-check-input extra-service"
+                                            type="checkbox"
+                                            value="DJ & Music"
+                                            data-price="7000"
+                                            id="dj">
+
+                                        <label
+                                            class="form-check-label"
+                                            for="dj">
+
+                                            DJ & Music + ₹7,000
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <div class="form-check mb-3">
+
+                                        <input
+                                            class="form-check-input extra-service"
+                                            type="checkbox"
+                                            value="Premium Decoration"
+                                            data-price="10000"
+                                            id="decoration">
+
+                                        <label
+                                            class="form-check-label"
+                                            for="decoration">
+
+                                            Premium Decoration + ₹10,000
+
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="form-check mb-3">
+
+                                        <input
+                                            class="form-check-input extra-service"
+                                            type="checkbox"
+                                            value="Premium Catering"
+                                            data-price="15000"
+                                            id="catering">
+
+                                        <label
+                                            class="form-check-label"
+                                            for="catering">
+
+                                            Premium Catering + ₹15,000
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FOOD -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                6. Food Preferences
+                            </h5>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Food Type
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        id="foodType">
+
+                                        <option>
+                                            Vegetarian
+                                        </option>
+
+                                        <option>
+                                            Non-Vegetarian
+                                        </option>
+
+                                        <option>
+                                            Both Vegetarian & Non-Vegetarian
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label class="form-label">
+                                        Number of Meals
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        id="meals">
+
+                                        <option>
+                                            One Meal
+                                        </option>
+
+                                        <option>
+                                            Two Meals
+                                        </option>
+
+                                        <option>
+                                            Three Meals
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- REQUIREMENTS -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                7. Additional Requirements
+                            </h5>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Special Requirements
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="requirements"
+                                    rows="5"
+                                    placeholder="Tell us about your special requirements..."></textarea>
+
+                            </div>
+
+
+                            <!-- PAYMENT -->
+
+                            <h5 class="mb-3 mt-4 text-primary">
+                                8. Payment Preference
+                            </h5>
+
+                            <div class="mb-4">
+
+                                <select
+                                    class="form-select"
+                                    id="payment">
+
+                                    <option>
+                                        Online Payment
+                                    </option>
+
+                                    <option>
+                                        Cash
+                                    </option>
+
+                                    <option>
+                                        Bank Transfer
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-main w-100">
+
+                                ✅ Confirm Booking
+
+                            </button>
+
+
+                        </form>
+
+
+                        <div
+                            id="bookingMessage"
+                            class="mt-4">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="col-lg-4">
+
+                    <div class="booking-summary">
+
+                        <h3>
+                            📋 Booking Summary
+                        </h3>
+
+                        <hr>
+
+                        <p>
+                            <strong>Event:</strong>
+                            <span id="summaryEvent">
+                                Not selected
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Date:</strong>
+                            <span id="summaryDate">
+                                Not selected
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Guests:</strong>
+                            <span id="summaryGuests">
+                                0
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Package:</strong>
+                            <span id="summaryPackage">
+                                Not selected
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Package Price:</strong>
+                            ₹<span id="summaryPackagePrice">
+                                0
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Extra Services:</strong>
+                        </p>
+
+                        <ul id="summaryExtras">
+                            <li>None</li>
+                        </ul>
+
+                        <hr>
+
+                        <p>
+                            <strong>Total Amount</strong>
+                        </p>
+
+                        <div class="total-price">
+                            ₹<span id="totalPrice">
+                                0
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section id="contact" class="section">
+
+    <div class="page-header">
+
+        <h1>📧 Contact Us</h1>
+
+        <p>
+            Get in touch with CelebrateX
+        </p>
+
+    </div>
+
+    <div class="container-custom py-5">
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📞
+                    </div>
+
+                    <h4>Phone</h4>
+
+                    <p>
+                        +91 98765 43210
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📧
+                    </div>
+
+                    <h4>Email</h4>
+
+                    <p>
+                        celebratex@gmail.com
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="contact-card">
+
+                    <div class="contact-icon">
+                        📍
+                    </div>
+
+                    <h4>Location</h4>
+
+                    <p>
+                        Chennai, Tamil Nadu
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <h4>
+        CelebrateX Event Management
+    </h4>
+
+    <p class="mb-0">
+        Making your special moments unforgettable.
+    </p>
+
+    <p class="mt-2 mb-0">
+        © 2026 CelebrateX. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    /* ==========================================
+       PAGE NAVIGATION
+    ========================================== */
+
+    function showPage(pageId) {
+
+        $(".section").removeClass("active");
+
+        $("#" + pageId).addClass("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        // Update URL hash
+        window.location.hash = pageId;
+    }
+
+
+    /* ==========================================
+       NAVIGATION LINKS
+    ========================================== */
+
+    $(document).on("click", ".page-link", function(e) {
+
+        e.preventDefault();
+
+        let pageId = $(this)
+            .attr("href")
+            .replace("#", "");
+
+        showPage(pageId);
+
+        // Close mobile navbar
+        $(".navbar-collapse").removeClass("show");
+
+    });
+
+
+    /* ==========================================
+       OPEN PAGE WHEN HASH CHANGES
+    ========================================== */
+
+    function loadPageFromHash() {
+
+        let hash = window.location.hash.replace("#", "");
+
+        if (hash && $("#" + hash).length) {
+
+            $(".section").removeClass("active");
+
+            $("#" + hash).addClass("active");
+
+        } else {
+
+            $(".section").removeClass("active");
+
+            $("#home").addClass("active");
+
+        }
+
+        window.scrollTo(0, 0);
+    }
+
+
+    window.addEventListener(
+        "hashchange",
+        loadPageFromHash
+    );
+
+
+    /* ==========================================
+       SEARCH EVENTS
+    ========================================== */
+
+    $("#eventSearch").on("keyup", function() {
+
+        let searchText = $(this)
+            .val()
+            .toLowerCase();
+
+        $(".event-item").each(function() {
+
+            let eventName = $(this)
+                .data("event")
+                .toLowerCase();
+
+            if (eventName.includes(searchText)) {
+
+                $(this).show();
+
+            } else {
+
+                $(this).hide();
+
+            }
+
+        });
+
+    });
+
+
+    /* ==========================================
+       BOOKING PRICE CALCULATION
+    ========================================== */
+
+    function updateBookingSummary() {
+
+        let eventType =
+            $("#eventType").val();
+
+        let eventDate =
+            $("#eventDate").val();
+
+        let guests =
+            $("#guests").val();
+
+        let packageSelect =
+            $("#package option:selected");
+
+        let packageName =
+            packageSelect.val();
+
+        let packagePrice =
+            Number(
+                packageSelect.data("price")
+            ) || 0;
+
+
+        /* Update event */
+
+        $("#summaryEvent").text(
+            eventType || "Not selected"
+        );
+
+
+        /* Update date */
+
+        $("#summaryDate").text(
+            eventDate || "Not selected"
+        );
+
+
+        /* Update guests */
+
+        $("#summaryGuests").text(
+            guests || "0"
+        );
+
+
+        /* Update package */
+
+        $("#summaryPackage").text(
+            packageName || "Not selected"
+        );
+
+
+        /* Update package price */
+
+        $("#summaryPackagePrice").text(
+            packagePrice.toLocaleString("en-IN")
+        );
+
+
+        /* Extra services */
+
+        let extras = [];
+
+        let extraTotal = 0;
+
+        $(".extra-service:checked").each(function() {
+
+            let service =
+                $(this).val();
+
+            let price =
+                Number(
+                    $(this).data("price")
+                );
+
+            extras.push(
+                service +
+                " - ₹" +
+                price.toLocaleString("en-IN")
+            );
+
+            extraTotal += price;
+
+        });
+
+
+        if (extras.length === 0) {
+
+            $("#summaryExtras").html(
+                "<li>None</li>"
+            );
+
+        } else {
+
+            $("#summaryExtras").html("");
+
+            extras.forEach(function(item) {
+
+                $("#summaryExtras").append(
+                    "<li>" + item + "</li>"
+                );
+
+            });
+
+        }
+
+
+        /* Total */
+
+        let total =
+            packagePrice +
+            extraTotal;
+
+        $("#totalPrice").text(
+            total.toLocaleString("en-IN")
+        );
+
+    }
+
+
+    /* ==========================================
+       BOOKING INPUT EVENTS
+    ========================================== */
+
+    $("#eventType").on(
+        "change",
+        updateBookingSummary
+    );
+
+    $("#eventDate").on(
+        "change",
+        updateBookingSummary
+    );
+
+    $("#guests").on(
+        "input",
+        updateBookingSummary
+    );
+
+    $("#package").on(
+        "change",
+        updateBookingSummary
+    );
+
+    $(".extra-service").on(
+        "change",
+        updateBookingSummary
+    );
+
+
+    /* ==========================================
+       BOOKING FORM SUBMIT
+    ========================================== */
+
+    $("#bookingForm").on("submit", function(e) {
+
+        e.preventDefault();
+
+
+        let name =
+            $("#fullName").val().trim();
+
+        let email =
+            $("#email").val().trim();
+
+        let phone =
+            $("#phone").val().trim();
+
+        let eventType =
+            $("#eventType").val();
+
+        let eventDate =
+            $("#eventDate").val();
+
+        let guests =
+            $("#guests").val();
+
+        let venue =
+            $("#venueAddress").val().trim();
+
+        let packageName =
+            $("#package").val();
+
+
+        /* Validation */
+
+        if (name === "") {
+
+            alert("Please enter your full name.");
+
+            return;
+
+        }
+
+
+        if (email === "") {
+
+            alert("Please enter your email.");
+
+            return;
+
+        }
+
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+            alert(
+                "Please enter a valid 10 digit phone number."
+            );
+
+            return;
+
+        }
+
+
+        if (eventType === "") {
+
+            alert(
+                "Please select an event type."
+            );
+
+            return;
+
+        }
+
+
+        if (eventDate === "") {
+
+            alert(
+                "Please select the event date."
+            );
+
+            return;
+
+        }
+
+
+        if (guests <= 0) {
+
+            alert(
+                "Please enter the number of guests."
+            );
+
+            return;
+
+        }
+
+
+        if (venue === "") {
+
+            alert(
+                "Please enter the venue address."
+            );
+
+            return;
+
+        }
+
+
+        if (packageName === "") {
+
+            alert(
+                "Please select a package."
+            );
+
+            return;
+
+        }
+
+
+        /* Booking ID */
+
+        let bookingId =
+            "CX" +
+            Date.now().toString().slice(-6);
+
+
+        let total =
+            $("#totalPrice").text();
+
+
+        /* Success message */
+
+        $("#bookingMessage").html(`
+
+            <div class="alert alert-success">
+
+                <h5>
+                    🎉 Booking Submitted Successfully!
+                </h5>
+
+                <p class="mb-1">
+                    <strong>Booking ID:</strong>
+                    ${bookingId}
+                </p>
+
+                <p class="mb-1">
+                    <strong>Name:</strong>
+                    ${name}
+                </p>
+
+                <p class="mb-1">
+                    <strong>Event:</strong>
+                    ${eventType}
+                </p>
+
+                <p class="mb-1">
+                    <strong>Date:</strong>
+                    ${eventDate}
+                </p>
+
+                <p class="mb-0">
+                    <strong>Total Amount:</strong>
+                    ₹${total}
+                </p>
+
+            </div>
+
+        `);
+
+
+        /* Move to success message */
+
+        document
+            .getElementById("bookingMessage")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    });
+
+
+    /* ==========================================
+       SET MINIMUM EVENT DATE
+    ========================================== */
+
+    let today =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+    $("#eventDate").attr(
+        "min",
+        today
+    );
+
+
+    /* ==========================================
+       INITIAL PAGE
+    ========================================== */
+
+    $(document).ready(function() {
+
+        loadPageFromHash();
+
+        updateBookingSummary();
+
+    });
+
+</script>
+
+
+<!-- Bootstrap JS -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+</html>

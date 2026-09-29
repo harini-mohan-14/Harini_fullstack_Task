@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+
+    <style>
+        body{
+            margin:0;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:#1b1b1b;
+            font-family:Arial, sans-serif;
+        }
+
+        .calculator{
+            background:#2b2b2b;
+            padding:20px;
+            border-radius:20px;
+            box-shadow:0 0 20px black;
+        }
+
+        #display{
+            width:260px;
+            height:60px;
+            border:none;
+            border-radius:12px;
+            background:white;
+            font-size:28px;
+            text-align:right;
+            padding:10px;
+            margin-bottom:15px;
+        }
+
+        .buttons{
+            display:grid;
+            grid-template-columns:repeat(4,60px);
+            gap:10px;
+        }
+
+        button{
+            width:60px;
+            height:60px;
+            border:none;
+            border-radius:12px;
+            font-size:28px;
+            color:white;
+            cursor:pointer;
+        }
+
+        .num{
+            background:#5a5a5a;
+        }
+
+        .op{
+            background:#FFA500;
+        }
+
+        .equal{
+            background:green;
+        }
+
+        .zero{
+            grid-column:span 2;
+            width:130px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+
+        <button class="op" onclick="clearDisplay()">AC</button>
+        <button class="op" onclick="press('%')">%</button>
+        <button class="op" onclick="deleteLast()">⌫</button>
+        <button class="op" onclick="press('/')">÷</button>
+
+        <button class="num" onclick="press('7')">7</button>
+        <button class="num" onclick="press('8')">8</button>
+        <button class="num" onclick="press('9')">9</button>
+        <button class="op" onclick="press('*')">×</button>
+
+        <button class="num" onclick="press('4')">4</button>
+        <button class="num" onclick="press('5')">5</button>
+        <button class="num" onclick="press('6')">6</button>
+        <button class="op" onclick="press('-')">−</button>
+
+        <button class="num" onclick="press('1')">1</button>
+        <button class="num" onclick="press('2')">2</button>
+        <button class="num" onclick="press('3')">3</button>
+        <button class="op" onclick="press('+')">+</button>
+
+        <button class="num zero" onclick="press('0')">0</button>
+        <button class="num" onclick="press('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+    </div>
+
+</div>
+
+<script>
+function press(value){
+    document.getElementById("display").value += value;
+}
+
+function clearDisplay(){
+    document.getElementById("display").value = "";
+}
+
+function deleteLast(){
+    var display = document.getElementById("display");
+    display.value = display.value.slice(0,-1);
+}
+
+function calculate(){
+    var display = document.getElementById("display");
+    try{
+        var exp = display.value;
+        exp = exp.replace(/(\d+(\.\d+)?)%/g,"($1/100)");
+        display.value = eval(exp);
+    }catch{
+        display.value = "Error";
+    }
+}
+</script>
+
+</body>
+</html>

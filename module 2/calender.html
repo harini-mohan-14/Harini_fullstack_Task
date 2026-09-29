@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>January 2026 Calendar</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: lightblue;
+    text-align: center;
+}
+
+.page{
+    display:none;
+    padding:30px;
+}
+
+#calendar{
+    display:block;
+}
+
+.page:target{
+    display:block;
+}
+
+.page:target ~ #calendar{
+    display:none;
+}
+
+table{
+    border-collapse:collapse;
+    margin:auto;
+}
+
+th,td{
+    border:2px solid black;
+    width:60px;
+    height:50px;
+}
+
+th{
+    background:navy;
+    color:white;
+}
+
+.holiday{
+    background:yellow;
+    font-weight:bold;
+}
+
+a{
+    text-decoration:none;
+    color:red;
+    font-weight:bold;
+}
+
+button{
+    padding:10px 20px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NEW YEAR PAGE -->
+<div id="newyear" class="page">
+    <h1>🎉 NEW YEAR</h1>
+    <h2>1 January 2026</h2>
+    <p>New Year's Day is celebrated on the first day of the year. People celebrate with prayers, family gatherings, and happiness.</p>
+    <a href="#calendar"><button>Back to Calendar</button></a>
+</div>
+
+<!-- PONGAL PAGE -->
+<div id="pongal" class="page">
+    <h1>🌾 PONGAL</h1>
+    <h2>15 January 2026</h2>
+    <p>Pongal is the Tamil harvest festival celebrated to thank the Sun God and farmers.</p>
+    <a href="#calendar"><button>Back to Calendar</button></a>
+</div>
+
+<!-- THIRUVALLUVAR DAY -->
+<div id="thiruvalluvar" class="page">
+    <h1>📖 THIRUVALLUVAR DAY</h1>
+    <h2>16 January 2026</h2>
+    <p>Thiruvalluvar Day is celebrated in honor of the Tamil poet Thiruvalluvar.</p>
+    <a href="#calendar"><button>Back to Calendar</button></a>
+</div>
+
+<!-- UZHAVAR THIRUNAL -->
+<div id="uzhavar" class="page">
+    <h1>🚜 UZHAVAR THIRUNAL</h1>
+    <h2>17 January 2026</h2>
+    <p>Uzhavar Thirunal is celebrated as Farmers' Day in Tamil Nadu.</p>
+    <a href="#calendar"><button>Back to Calendar</button></a>
+</div>
+
+<!-- REPUBLIC DAY -->
+<div id="republic" class="page">
+    <h1>🇮🇳 REPUBLIC DAY</h1>
+    <h2>26 January 2026</h2>
+    <p>Republic Day celebrates the adoption of the Constitution of India on 26 January.</p>
+    <a href="#calendar"><button>Back to Calendar</button></a>
+</div>
+
+<!-- CALENDAR PAGE -->
+<div id="calendar">
+    <h1>JANUARY 2026 CALENDAR</h1>
+
+    <table>
+        <tr>
+            <th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+        </tr>
+
+        <tr>
+            <td></td><td></td><td></td><td></td>
+            <td class="holiday"><a href="#newyear">1</a></td>
+            <td>2</td><td>3</td>
+        </tr>
+
+        <tr>
+            <td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+        </tr>
+
+        <tr>
+            <td>11</td><td>12</td><td>13</td><td>14</td>
+            <td class="holiday"><a href="#pongal">15</a></td>
+            <td class="holiday"><a href="#thiruvalluvar">16</a></td>
+            <td class="holiday"><a href="#uzhavar">17</a></td>
+        </tr>
+
+        <tr>
+            <td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
+        </tr>
+
+        <tr>
+            <td>25</td>
+            <td class="holiday"><a href="#republic">26</a></td>
+            <td>27</td><td>28</td><td>29</td><td>30</td><td>31</td>
+        </tr>
+    </table>
+
+    <h3>Click the yellow holiday dates.</h3>
+</div>
+
+</body>
+</html>

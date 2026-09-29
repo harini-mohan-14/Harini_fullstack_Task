@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DMI College Registration Form</title>
+
+<style>
+body{
+    background-color:lightblue;
+    font-family:Arial;
+}
+.box{
+    width:350px;
+    margin:auto;
+    margin-top:30px;
+    background:white;
+    border:2px solid black;
+    padding:20px;
+}
+h2,h3{
+    text-align:center;
+}
+input,select{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+}
+.gender{
+    width:auto;
+}
+button{
+    width:100%;
+    padding:10px;
+    background:green;
+    color:white;
+    border:none;
+}
+#success{
+    display:none;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="form">
+<h2>DMI College of Engineering</h2>
+<h3>Registration Form</h3>
+
+<form>
+Name:
+<input type="text" required>
+
+Email:
+<input type="email" required>
+
+Password:
+<input type="password" required>
+
+Mobile Number:
+<input type="tel" required>
+
+Gender:<br>
+<input type="radio" name="gender" class="gender"> Male
+<input type="radio" name="gender" class="gender"> Female
+<br><br>
+
+Department:
+<select>
+<option>CSE</option>
+<option>AI & ML</option>
+<option>IT</option>
+<option>ECE</option>
+</select>
+
+Date of Birth:
+<input type="date">
+
+<button type="button" onclick="showSuccess()">Register</button>
+</form>
+</div>
+
+<div class="box" id="success">
+<h2>REGISTER SUCCESSFULLY!</h2>
+<p>Welcome to DMI College of Engineering.</p>
+<button onclick="backForm()">Back</button>
+</div>
+
+<script>
+function showSuccess(){
+document.getElementById("form").style.display="none";
+document.getElementById("success").style.display="block";
+}
+
+function backForm(){
+document.getElementById("success").style.display="none";
+document.getElementById("form").style.display="block";
+}
+</script>
+
+</body>
+</html>
